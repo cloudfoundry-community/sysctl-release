@@ -56,6 +56,15 @@ Here is a [production BOSH manifest](https://github.com/cunnie/deployments/blob/
 
 ## Developer Notes
 
+If colocating this release with a Concourse v3.9.1+ worker, enable IP forwarding lest the containers have no network access:
+
+```yaml
+properties:
+  sysctl_conf: |
+    # fixes: `Could not resolve host: github.com`
+    net.ipv4.ip_forward=1
+```
+
 Restraint and caution should be exercised when using `bash_start_snippet`
 and `bash_stop_snippet`: consider using custom BOSH releases instead.
 
